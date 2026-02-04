@@ -1,4 +1,4 @@
-FROM container-registry.oracle.com/java/jdk:25 AS build
+FROM bellsoft/liberica-openjdk-alpine:25 AS build
 WORKDIR /app
 
 COPY .mvn/ .mvn
@@ -10,7 +10,7 @@ RUN ./mvnw dependency:go-offline
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-FROM container-registry.oracle.com/java/jdk:25
+FROM bellsoft/liberica-openjre-alpine:25
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
