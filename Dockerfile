@@ -1,4 +1,4 @@
-FROM openjdk:25-slim AS build
+FROM container-registry.oracle.com/java/jdk:25 AS build
 WORKDIR /app
 
 COPY .mvn/ .mvn
@@ -10,7 +10,7 @@ RUN ./mvnw dependency:go-offline
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-FROM openjdk:25-slim
+FROM container-registry.oracle.com/java/jdk:25
 WORKDIR /app
 
 COPY --from=build /app/target/*.jar app.jar
