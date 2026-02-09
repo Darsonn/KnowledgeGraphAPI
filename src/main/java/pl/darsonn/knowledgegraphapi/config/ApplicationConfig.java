@@ -44,6 +44,6 @@ public class ApplicationConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(); // Najbezpieczniejszy standard haszowania
+        return new BCryptPasswordEncoder();
     }
 }
