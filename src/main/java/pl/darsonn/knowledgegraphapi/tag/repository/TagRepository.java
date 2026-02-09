@@ -12,11 +12,8 @@ import java.util.UUID;
 
 @Repository
 public interface TagRepository extends JpaRepository<Tag, UUID> {
-
-    // Szukanie tagów konkretnego użytkownika (podstawowe wyszukiwanie)
     List<Tag> findAllByUserIdAndNameContainingIgnoreCase(UUID userId, String name);
 
-    // Kluczowe zapytanie: Pobierz najpopularniejsze tagi użytkownika
     @Query("SELECT t FROM Tag t " +
             "LEFT JOIN t.memories m " +
             "WHERE t.user.id = :userId " +
